@@ -33,3 +33,24 @@ export const addPets = async (req, res) => {
         })
     }
 }
+
+export const getPets = async (req, res) => {
+    try {
+        const pets = await Pets.find({})
+        return res.status(200).json({
+            status: "success",
+            data: {
+                statusCode: 200,
+                value: pets
+            }
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "failure",
+            data: {
+                statusCode: 500,
+                message: error.message || "Internal server error"
+            }
+        })
+    }
+}
