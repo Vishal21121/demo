@@ -18,6 +18,9 @@ const petSchema = mongoose.Schema({
     },
     photo: {
         type: String
+    },
+    type: {
+        type: String
     }
 })
 

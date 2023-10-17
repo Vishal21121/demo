@@ -31,6 +31,10 @@ export const addPetsValidator = () => {
             .trim()
             .notEmpty()
             .withMessage("Please photo url"),
+        body("type")
+            .trim()
+            .notEmpty()
+            .withMessage("Please enter pet type"),
     ]
 }
 

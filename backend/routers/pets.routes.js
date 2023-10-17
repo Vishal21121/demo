@@ -5,6 +5,6 @@ import { addPets, getPets } from "../controllers/pets.controller.js"
 const router = express.Router()
 
 router.route("/add-pets").post(addPetsValidator(), validation, addPets);
-router.route("/get-pets").get(getPets)
+router.route("/get-pets").post(getPets)
 
 export default router

@@ -1,9 +1,9 @@
 import { Pets } from "../models/pets.models.js"
 
 export const addPets = async (req, res) => {
-    const { name, gender, species, favFoods, birthYear, photo } = req.body
+    const { name, gender, species, favFoods, birthYear, photo, type } = req.body
     try {
-        const petCreated = await Pets.create({ name, gender, species, favFoods, birthYear, photo })
+        const petCreated = await Pets.create({ name, gender, species, favFoods, birthYear, photo, type })
         const petGot = await Pets.findById(petCreated._id)
         if (!petGot) {
             return res.status(500).json({
@@ -35,8 +35,18 @@ export const addPets = async (req, res) => {
 }
 
 export const getPets = async (req, res) => {
+    const { type } = req.body
+    if (!type) {
+        return res.status(400).json({
+            status: "failure",
+            data: {
+                statusCode: 400,
+                message: "type is not provided"
+            }
+        })
+    }
     try {
-        const pets = await Pets.find({})
+        const pets = await Pets.find({ type })
         return res.status(200).json({
             status: "success",
             data: {
